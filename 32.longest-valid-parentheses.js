@@ -13,16 +13,14 @@
  * @return {number}
  */
 var longestValidParentheses = function (s) {
-    let maxValid = 0
-    let stack = []
-    for (let i = 0; i < s.length; i++) {
-        if (s[i] == '(') {
-            
-        }
+  let maxValid = 0
+  for (let i = 0; i < s.length; i++) {
+    if (s[i] === '(') {
+      
     }
-    console.log('stack :>> ', stack, maxValid)
-    return maxValid
+  }
+  return maxValid
 };
-longestValidParentheses(')()())')
+longestValidParentheses(')()(()))')
 // @lc code=end
 
