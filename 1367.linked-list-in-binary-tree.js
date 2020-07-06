@@ -40,14 +40,19 @@
 // isSubPath([1,4,2,6], [1,4,4,null,2,2,null,1,null,6,8,null,null,null,null,1,3])
 // @lc code=end
 
-var removeDuplicates = function (nums) {
-  for (let i = 0; i < nums.length; i++) {
-    if (nums[i] === nums[i + 1]){
-      nums.splice(i, 1)
-      i--
+/**
+ * @param {number[]} prices
+ * @return {number}
+ */
+var maxProfit = function(prices) {
+  let maxPro = 0
+  for(let i = 0; i< prices.length -1; i++){
+    if(prices[i] < prices[i+1]){
+      maxPro += prices[i+1] - prices[i]
     }
   }
-  console.log('nums :>> ', nums)
+  console.log('maxPro :>> ', maxPro)
+  return maxPro
 };
 
-removeDuplicates([0, 0, 1, 1, 1, 2, 2, 3, 3, 4])
+maxProfit([7,1,5,3,6,4])
