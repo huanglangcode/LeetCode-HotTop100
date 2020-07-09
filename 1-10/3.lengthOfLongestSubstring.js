@@ -21,5 +21,5 @@ var lengthOfLongestSubstring = function (s) {
     max = Math.max(array.length, max)
   }
   return max
-};
+}
 // lengthOfLongestSubstring('abcabcbb')

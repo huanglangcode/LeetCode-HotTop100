@@ -4,7 +4,7 @@
  * [121] Best Time to Buy and Sell Stock
  */
 
- /** 暴力解法
+/** 暴力解法
   let res = 0
   for (let i = 0; i < prices.length; i++) {
     let buyAmount = prices[i]
@@ -33,7 +33,7 @@ var maxProfit = function (prices) {
      b5 = a5 - a4
      b6 = a6 - a5
      adding all these, all the middle terms will cancel out except two. if max = a6 - a2
-     b3 + b4 + b5 + b6 = a6 - a2 
+     b3 + b4 + b5 + b6 = a6 - a2
    */
   let res = 0
   let cur = 0
@@ -43,6 +43,6 @@ var maxProfit = function (prices) {
     res = Math.max(res, cur)
   }
   return res
-};
+}
 // @lc code=end
 

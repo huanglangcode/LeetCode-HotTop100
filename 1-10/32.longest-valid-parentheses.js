@@ -46,11 +46,11 @@ var longestValidParentheses = function (s) {
   let maxLength = dp(s)
   // console.log('maxLength :>> ', maxLength)
   return maxLength
-};
+}
 
 var dp = (s) => {
   let maxLength = 0
-  //如果是类似 ()() dp[i] = dp[i-2] + 2 
+  //如果是类似 ()() dp[i] = dp[i-2] + 2
   //如果是类似 ()(()) dp[i] = dp[i-1] + 2 + dp[i - dp[i - 1] - 2] 即dp[5] = dp[4] + 2 + dp[5-2-2] = 2 + 2 + 2
   //注意边界条件
   let dp = Array(s.length).fill(0)

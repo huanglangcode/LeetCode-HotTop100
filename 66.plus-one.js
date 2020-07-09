@@ -27,7 +27,7 @@ var plusOne = function (digits) {
       break
     }
   } while (digits[i] !== 0)
-};
+}
 plusOne([9])
 // @lc code=end
 

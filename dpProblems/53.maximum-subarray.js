@@ -27,7 +27,7 @@ var maxSubArray = function (nums) {
     maxSub = Math.max(maxSub, dp[i])
   }
   return maxSub
-};
+}
 
 // maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4])
 /**暴力解法

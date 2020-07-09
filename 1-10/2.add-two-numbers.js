@@ -9,7 +9,7 @@
  * @param {ListNode} l1
  * @param {ListNode} l2
  * @return {ListNode}
- * 342+465= 807 最终返回的是 7 -> 0 -> 8 
+ * 342+465= 807 最终返回的是 7 -> 0 -> 8
  */
 //注意进位 注意最后剩余的进位 注意两个链表长度不一致
 // !!!最终返回的是7 0 8 !!!
@@ -31,11 +31,11 @@ var addTwoNumbers = function (l1, l2) {
     temp.next = new ListNode(nextBit)
   }
   return result.next
-};
+}
 
 function ListNode(val) {
-  this.val = val;
-  this.next = null;
+  this.val = val
+  this.next = null
 }
 var l1 = new ListNode(5)
 l1.next = new ListNode(6)

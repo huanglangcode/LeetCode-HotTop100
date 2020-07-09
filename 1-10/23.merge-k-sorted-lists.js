@@ -45,6 +45,6 @@ var mergeKLists = function (lists) {
     point = point.next
   }
   return result.next
-};
+}
 // @lc code=end
 

@@ -39,7 +39,7 @@ var nextPermutation = function (nums) {
     nums.reverse()
   }
   // console.log(nums)
-};
+}
 
 var swap = (nums, i, j) => {
   [nums[i], nums[j]] = [nums[j], nums[i]]
