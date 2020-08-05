@@ -19,7 +19,6 @@ var rotate = function (matrix) {
       matrix[i][j] = tmp;
     }
   }
-  console.log('matrix >> ', matrix)
   for (let i = 0; i < n; i++) {
     for (let j = 0; j < n / 2; j++) {
       let tmp = matrix[i][j];
@@ -27,7 +26,6 @@ var rotate = function (matrix) {
       matrix[i][n - j - 1] = tmp;
     }
   }
-  console.log('matrix >> ', matrix)
 };
 // rotate([
 //   [1, 2, 3],
