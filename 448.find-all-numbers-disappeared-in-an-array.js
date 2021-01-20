@@ -25,10 +25,8 @@ var findDisappearedNumbers = function(nums) {
     let res = []
     nums.forEach((val, ind, arr) => {
         let tmp = Math.abs(arr[ind]) - 1;
-        console.log('tmp :>> ', tmp);
         if (arr[tmp] > 0)
             arr[tmp] *= -1;
-            console.log('arr :>> ', arr);
     })
     nums.forEach((val, ind) => {
         if (val > 0)
