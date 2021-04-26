@@ -25,7 +25,7 @@ class Solution {
   shuffle() {
     const shuffled = this.origin.slice()
     const swap = (arr, i, j) => {
-      [arr[i],arr[j]]= [arr[j],arr[i]]
+      [arr[i], arr[j]] = [arr[j], arr[i]]
     }
     for (let i = 0; i < shuffled.length; i++) {
       swap(shuffled, i, Math.floor(Math.random() * shuffled.length))

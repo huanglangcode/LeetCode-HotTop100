@@ -9,21 +9,24 @@
  * @param {number} n
  * @return {string[]}
  */
-var fizzBuzz = function (n) {
-  let result = []
-  for (let i = 0; i < n; i++) {
-    if ((i+1) % 15 === 0) {
-      result[i] = 'FizzBuzz'
-    } else if ((i+1) % 5 === 0) {
-      result[i] = 'Buzz'
-    } else if ((i+1) % 3 === 0) {
-      result[i] = 'Fizz'
-    } else {
-      result[i] = '' + (i + 1)
-    }
-  }
-  return result
-};
-fizzBuzz(15)
-// @lc code=end
 
+var find132pattern = function (nums) {
+  if (nums.length < 3) {
+    return false
+  }
+  let next = Number.MIN_SAFE_INTEGER
+  let stack = []
+  for (let i = nums.length - 1; i >= 0; i--) {
+    if (nums[i] < next) {
+      return true
+    }
+    while (stack.length && stack[stack.length - 1] < nums[i]) {
+      next = stack.pop()
+    }
+    stack.push(nums[i])
+  }
+  return false
+};
+
+let res = find132pattern([3, 5, 0, 3, 4])
+console.log('res :>> ', res);
