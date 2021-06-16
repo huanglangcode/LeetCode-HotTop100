@@ -1,0 +1,52 @@
+{
+    "recentProjects": [
+        {
+            "projectName": "project1",
+            "projectPath": "D:\\workspace\\LeetCode-HotTop100\\recentProjects\\project1",
+            "editTime": 1620896352620,
+            "isTop": true
+        },
+        {
+            "projectName": "project2",
+            "editTime": 1620895322035,
+            "projectPath": "D:\\workspace\\LeetCode-HotTop100\\recentProjects\\project2",
+            "isTop": true
+        },
+        {
+            "projectName": "project3",
+            "projectPath": "D:\\workspace\\LeetCode-HotTop100\\recentProjects\\project3",
+            "editTime": 1620894773768,
+            "isTop": true
+        },
+        {
+            "projectName": "project4",
+            "editTime": 1620887189274,
+            "projectPath": "D:\\workspace\\LeetCode-HotTop100\\recentProjects\\project4"
+        },
+        {
+            "projectName": "project5",
+            "editTime": 1620887389274,
+            "projectPath": "D:\\workspace\\LeetCode-HotTop100\\recentProjects\\project5"
+        }
+    ],
+    "topProjects": [
+        {
+            "projectName": "project1",
+            "projectPath": "D:\\workspace\\LeetCode-HotTop100\\recentProjects\\project1",
+            "editTime": 1620896352620,
+            "isTop": true
+        },
+        {
+            "projectName": "project2",
+            "editTime": 1620895322035,
+            "projectPath": "D:\\workspace\\LeetCode-HotTop100\\recentProjects\\project2",
+            "isTop": true
+        },
+        {
+            "projectName": "project3",
+            "projectPath": "D:\\workspace\\LeetCode-HotTop100\\recentProjects\\project3",
+            "editTime": 1620894773768,
+            "isTop": true
+        }
+    ]
+}

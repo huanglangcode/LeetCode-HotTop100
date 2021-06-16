@@ -8,67 +8,49 @@
 /**
  * Initialize your data structure here.
  */
+interface TrieNode {
+}
 class Trie {
+    public root: TrieNode;
     constructor() {
-        this.root = {};
+        this.root = {
+        };
     }
     /**
      * Inserts a word into the trie.
      * @param {string} word
      * @return {void}
      */
-    insert(word) {
-        let node = this.root;
-        // node = {}
-        for (const c of word) {
-            if (node[c] == null) {
-                node[c] = {};
-                // root.a = {}
-                // root.a.p = {}
-            }
-            node = node[c];
-            // node = root.a = {}
-            // node = root.a.p = {}
-        }
-        node.isWord = true;
-    }
-    traverse(word) {
-        let node = this.root;
-        for (let c of word) {
-            node = node[c];
-            if (node == null) return null;
-        }
-        return node;
+    insert(word: string): void {
     }
     /**
      * Returns if the word is in the trie.
      * @param {string} word
      * @return {boolean}
      */
-    search(word) {
-        const node = this.traverse(word);
-        return node != null && node.isWord === true;
+    search(word: string): boolean {
+        return false;
     }
     /**
      * Returns if there is any word in the trie that starts with the given prefix.
      * @param {string} prefix
      * @return {boolean}
      */
-    startsWith(prefix) {
-        return this.traverse(prefix) != null;
+    startsWith(prefix: string): boolean {
+        return false;
     }
 }
 
 
 var obj = new Trie();
-console.log('obj :>> ', JSON.stringify(obj));
+console.log("obj :>> ", JSON.stringify(obj));
 obj.insert("apple");
 obj.insert("application");
-console.log('obj :>> ', JSON.stringify(obj));
+console.log("obj :>> ", JSON.stringify(obj));
 var param_2 = obj.search("apple");
-console.log('param_2 :>> ', param_2);
+console.log("param_2 :>> ", param_2);
 var param_3 = obj.startsWith("ap");
-console.log('param_3 :>> ', param_3);
+console.log("param_3 :>> ", param_3);
 
 
 /**

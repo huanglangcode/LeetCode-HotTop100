@@ -1,7 +1,7 @@
 /*
- * @lc app=leetcode id=231 lang=javascript
+ * @lc app=leetcode id=342 lang=javascript
  *
- * [231] Power of Two
+ * [342] Power of Four
  */
 
 // @lc code=start
@@ -9,11 +9,14 @@
  * @param {number} n
  * @return {boolean}
  */
-var isPowerOfTwo = function (n) {
+var isPowerOfFour = function (n) {
     if (n === 0) {
         return false;
     }
-    let p = n.toString(2);
+    let p = n.toString(4);
+    if (p[0] !== '1') {
+        return false;
+    }
     for (let i = p.length - 1; i >= 1; i--) {
         if (p[i] !== '0') {
             return false;
@@ -22,9 +25,3 @@ var isPowerOfTwo = function (n) {
     return true;
 };
 // @lc code=end
-
-isPowerOfTwo(1);
-isPowerOfTwo(2);
-isPowerOfTwo(3);
-isPowerOfTwo(4);
-isPowerOfTwo(5);

@@ -1,0 +1,21 @@
+{
+  "name": "leetcode-hottop100",
+  "version": "1.0.0",
+  "description": "playground",
+  "main": "testEvent.ts",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/huanglangcode/LeetCode-HotTop100.git"
+  },
+  "author": "lang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/huanglangcode/LeetCode-HotTop100/issues"
+  },
+  "homepage": "https://github.com/huanglangcode/LeetCode-HotTop100#readme"
+}
