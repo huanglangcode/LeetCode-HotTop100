@@ -3,8 +3,17 @@
   "version": "1.0.0",
   "description": "playground",
   "main": "testEvent.ts",
-  "dependencies": {},
-  "devDependencies": {},
+  "dependencies": {
+    "@types/acorn": "^4.0.6",
+    "@types/node": "^16.4.7",
+    "acorn": "^8.4.1",
+    "ffi-napi": "^4.0.3",
+    "open": "^8.2.1"
+  },
+  "devDependencies": {
+    "lockfile": "^1.0.4",
+    "proper-lockfile": "^4.1.2"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

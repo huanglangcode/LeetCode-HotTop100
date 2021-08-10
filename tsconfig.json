@@ -26,22 +26,7 @@
                 "node_modules/*",
                 "node_modules/@typs/node/*"
             ]
-        }
-    },
-    "include": [
-        "product/**/*.ts",
-        "product/**/*.tsx",
-        "common/**/*.ts",
-        "common/**/*.tsx",
-        "middleware/**/*.ts",
-        "middleware/**/*.tsx"
-    ],
-    "exclude": [
-        "product/cyclone_installer/**/*",
-        "**/*functest*.ts",
-        "middleware/plugin/chrome_op_plugin/chrome_op_plugin.ts",
-        "common/addon",
-        "common/utils/node/",
-        "common/utils/electron/"
-    ]
+        },
+        "esModuleInterop": true
+    }
 }

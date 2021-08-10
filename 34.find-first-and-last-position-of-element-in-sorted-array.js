@@ -34,37 +34,62 @@ public int bsearch(int[] a, int n, int value) {
   if (low < n && a[low]==value) return low;
   else return -1;
 }
- */
+//  */
 var searchRange = function (nums, target) {
-    let result = [-1, -1]
-    if (nums.length === 0) {
-        return result
+  /**
+   * 定义函数分别找到其 左边界 右边界
+   * 左边界: 第一个大于等于target的
+   * 右边界: 第一个大于target的
+   */
+  const searchIndex = (arr, target, l) => {
+    let r = arr.length - 1;
+    while (l < r) {
+      const mid = l + (r - l >> 1);
+      const curr = arr[mid];
+      if (curr < target) {
+        l = mid + 1;
+      } else if (curr >= target) {
+        r = mid;
+      }
     }
-    let low = 0
-    let high = nums.length - 1
-    while (low <= high) {
-        let mid = low + ((high - low) >> 1)
-        if (nums[mid] > target) {
-            high = mid - 1
-        } else if (nums[mid] < target) {
-            low = mid + 1
-        } else {
-            result.fill(mid)
-            break
-        }
-    }
-    if (result[0] === -1) {
-        return result
-    } else {
-        while (nums[result[0] - 1] === target) {
-            result[0] = result[0] - 1
-        }
-        while (nums[result[1] + 1] === target) {
-            result[1] = result[1] + 1
-        }
-    }
-    return result
+    console.log('l :>> ', l);
+    return l;
+  };
+  let first = searchIndex(nums, target, 0);
+  if (nums[first] !== target) {
+    return [-1, -1];
+  }
+  let second = searchIndex(nums, target + 1, first);
+  if (second === nums.length - 1 && nums[first] === nums[second]) {
+    second += 1;
+  }
+  return [first, second - 1];
+
 };
-searchRange([5, 7, 7, 8, 8, 10], 8)
+searchRange([5, 7, 7, 8, 8, 10], 8);
+// searchRange([2, 2], 2);
 // @lc code=end
 
+// var nums = [1, 2, 3, 4, 5, 7, 8, 9, 11, 13, 17, 21, 22, 23, 25, 28, 30, 31, 32, 34, 35, 36];
+// var searchRange = function (nums, target) {
+//     const searchIndex = (arr, target, l) => {
+//         let r = arr.length - 1;
+//         while (l < r) {
+//             const mid = l + (r - l >> 1);
+//             const curr = arr[mid];
+//             if (curr < target) {
+//                 l = mid + 1;
+//             } else if (curr >= target) {
+//                 r = mid;
+//             }
+//         }
+//         console.log('l :>> ', l);
+//         return l;
+//     };
+//     let ele1 = searchIndex(nums, target, 0)
+//     if (nums[ele1] !== target) {
+//         return [-1, -1]
+//     }
+//     let ele2 = searchIndex(nums, target, ele1)
+//     return [ele1, ele2 - 1]
+// };

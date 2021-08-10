@@ -67,10 +67,8 @@ function initCopyName(srcArr, dest) {
                     maxIdx = Math.max(maxIdx, parseInt(tempIdx));
                 }
             });
-            // return `${path.resolve(src, "..")}\\${basename} - 副本 (${++maxIdx})${extName}`;
             destArr.push(path.join(dest, `${basename} - 副本 (${++maxIdx})${extName}`));
         } else {
-            // return `${path.resolve(src, "..")}\\${basename} - 副本${extName}`;
             destArr.push(path.join(dest, `${basename} - 副本${extName}`));
         }
     }
