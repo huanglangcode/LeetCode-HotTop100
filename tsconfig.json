@@ -1,32 +1,25 @@
 {
-    "compilerOptions": {
-        "target": "es2016",
-        "module": "commonjs",
-        "jsx": "react",
-        "declaration": true,
-        "noEmit": true,
-        "strict": true,
-        "noUnusedLocals": false,
-        "noImplicitAny": false,
-        "noImplicitReturns": true,
-        "allowSyntheticDefaultImports": true,
-        "skipLibCheck": true,
-        "experimentalDecorators": true,
-        "resolveJsonModule": true,
-        "baseUrl": ".",
-        "typeRoots": [
-            "node_modules/@types"
-        ],
-        "paths": {
-            "~/*": [
-                "./*"
-            ],
-            "*": [
-                "*",
-                "node_modules/*",
-                "node_modules/@typs/node/*"
-            ]
-        },
-        "esModuleInterop": true
-    }
+  "compilerOptions": {
+    "target": "es2016",
+    "module": "commonjs",
+    "jsx": "react",
+    "declaration": true,
+    "noEmit": true,
+    "strict": true,
+    "noUnusedLocals": false,
+    "noImplicitAny": false,
+    "noImplicitReturns": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "experimentalDecorators": true,
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "typeRoots": ["node_modules/@types"],
+    "paths": {
+      "~/*": ["./*"],
+      "*": ["*", "node_modules/*", "node_modules/@typs/node/*"]
+    },
+    "esModuleInterop": true,
+    "emitDecoratorMetadata": true
+  }
 }

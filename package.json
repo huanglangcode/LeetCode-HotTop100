@@ -7,8 +7,10 @@
     "@types/acorn": "^4.0.6",
     "@types/node": "^16.4.7",
     "acorn": "^8.4.1",
+    "archiver": "^5.3.0",
     "ffi-napi": "^4.0.3",
-    "open": "^8.2.1"
+    "open": "^8.2.1",
+    "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
     "lockfile": "^1.0.4",
