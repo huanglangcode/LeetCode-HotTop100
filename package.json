@@ -5,14 +5,18 @@
   "main": "testEvent.ts",
   "dependencies": {
     "@types/acorn": "^4.0.6",
-    "@types/node": "^16.4.7",
+    "@types/eslint": "^7.28.0",
     "acorn": "^8.4.1",
     "archiver": "^5.3.0",
     "ffi-napi": "^4.0.3",
     "open": "^8.2.1",
-    "reflect-metadata": "^0.1.13"
+    "reflect-metadata": "^0.1.13",
+    "tar-fs": "^2.1.1"
   },
   "devDependencies": {
+    "@types/node": "^16.7.1",
+    "crypto-js": "^4.1.1",
+    "eslint": "^7.32.0",
     "lockfile": "^1.0.4",
     "proper-lockfile": "^4.1.2"
   },

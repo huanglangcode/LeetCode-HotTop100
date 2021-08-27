@@ -534,9 +534,20 @@
 //     });
 // }, 5000);
 
-const fs = require('fs');
-const path = require('path');
-let p = path.resolve("D:\\Temp\\example11\\测试文件夹 - 副本 (1)");
-fs.rmdir(p, { recursive: true }, (err) => {
-    console.log('err :>> ', err);
-});
+const { spawnSync } = require('child_process');
+const fs = require('fs')
+const path = require('path')
+const util = require('util')
+const tar = require('tar-fs')
+
+let toolsDir = "D:\\workspace\\3.4\\cyclone-designer-robot\\tools\\windows\\x64"
+const tools = fs.readdirSync(toolsDir)
+fs.promises.readdir()
+console.log('tools :>> ', tools);
+
+for (const tool of tools) {
+    if (tool.endsWith('.tar')) {
+        // spawnSync("tar", [`xf ${path.join(toolsDir, tool)}`, `-C ${path.join(toolDir, "node")}`, '&']);
+        fs.createReadStream(path.join(toolsDir, tool)).pipe(tar.extract(path.join(toolsDir, "node")))
+    }
+}

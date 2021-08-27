@@ -26,22 +26,31 @@ function TreeNode(val, left, right) {
  * @return {TreeNode}
  */
 var buildTree = function (preorder, inorder) {
-    return helper(preorder, 0, preorder.length - 1, inorder, 0, inorder.length - 1)
-};
-
-var helper = (Pre, pStart, pEnd, In, iStart, iEnd) => {
-    if (pStart > pEnd || iStart > iEnd) {
-        return null
+    const helper = (leftStart, leftEnd, rightStart, rightEnd) => {
+        if (leftStart > leftEnd || rightStart > rightEnd) {
+            return
+        }
+        let root = new TreeNode(preorder[leftStart])
+        let idx = leftStart
+        while (inorder[idx] !== root.val) {
+            idx++
+        }
+        // root.left = helper(Pre, pStart + 1, pStart + rootIndex - iStart, In, iStart, rootIndex - 1)
+        // root.right = helper(Pre, pStart + rootIndex - iStart + 1, pEnd, In, rootIndex + 1, iEnd)
+        // root.left = helper(leftStart, leftStart + idx,)
+        // root.right = helper(, idx + 1, rightEnd)
     }
-    let root = new TreeNode(Pre[pStart])
-    let rootIndex = iStart
-    while (In[rootIndex] !== Pre[pStart]) {
-        rootIndex++
-    }
-    root.left = helper(Pre, pStart + 1, pStart + rootIndex - iStart, In, iStart, rootIndex - 1)
-    root.right = helper(Pre, pStart + rootIndex - iStart + 1, pEnd, In, rootIndex + 1, iEnd)
+    const root = helper(0, preorder.length - 1, 0, inorder.length - 1)
     return root
-}
+};
 // @lc code=end
 
 buildTree([3, 9, 20, 15, 7], [9, 3, 15, 20, 7])
+
+// 0 4   1 -> 0 0
+// 0 4   
+
+
+//     3 
+//  9    20
+//     15   7

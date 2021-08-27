@@ -19,8 +19,24 @@
  * @param {string} s
  * @return {boolean}
  */
-var checkRecord = function(s) {
-
+var checkRecord = function (s) {
+    let c1 = 0
+    let c2 = 0
+    for (let i = 0; i < s.length; i++) {
+        const char = s[i]
+        if (char === 'A') {
+            if (c1) { return false }
+            c1++
+            c2 = 0
+        } else if (char === 'L') {
+            if (c2 === 2) { return false }
+            c2++
+        } else {
+            c2 = 0
+        }
+    }
+    return true
 };
 // @lc code=end
 
+checkRecord('LLPPLLLALLPL')
