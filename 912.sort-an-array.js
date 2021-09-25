@@ -10,8 +10,9 @@
  * @return {number[]}
  */
 var sortArray = function (nums) {
-    // quickSort(nums, 0, nums.length - 1);
-    return mergeSort(nums);
+    quickSort(nums, 0, nums.length - 1);
+    // return mergeSort(nums);
+    console.log('nums :>> ', nums);
 };
 
 var mergeSort = (nums) => {
@@ -62,12 +63,14 @@ var partition = (nums, left, right) => {
             idx++;
         }
     }
+    console.log('nums :>> ', nums);
     [nums[idx - 1], nums[pivot]] = [nums[pivot], nums[idx - 1]];
     return idx - 1;
 };
 // @lc code=end
 
-sortArray([6, 3, 1, 4, 2, 5, 7, 8, 9]);
+var arr = [5, 1, 3, 7, 2, 4, 6, 8, 2, 5, 7, 6, 4, 1, 2, 4, 6, 7, 5, 8, 7, 9, 10]
+partition(arr, 0, arr.length - 1);
 
 // 7 -> 6 3 1 4 2 5  7  8 9
 // 6 -> 3 1 4 2 5  6    8 -> 8  9
