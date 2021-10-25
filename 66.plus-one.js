@@ -8,26 +8,27 @@
 /**
  * @param {number[]} digits
  * @return {number[]}
- * Input: [1,9,9,9]
- * Output: [2,0,0,0]
  */
 var plusOne = function (digits) {
-  let i = digits.length - 1
-  do {
-    digits[i] = digits[i] + 1
-    if (digits[i] === 10) {
-      digits[i] = 0
-      if(digits[i - 1]){
-        i--
-      }else{
-        digits.unshift(1)
-        break
-      }
+  let n = digits.length - 1
+  let carry = 1
+  while (carry) {
+    digits[n] += 1
+    if (digits[n] === 10) {
+      digits[n] = 0
+      carry = 1
+      n--
     } else {
       break
     }
-  } while (digits[i] !== 0)
+    if (n < 0 && carry) {
+      digits.unshift(carry)
+      break
+    }
+  }
+  return digits
 }
-plusOne([9])
+let res = plusOne([9])
+console.log('digits :>> ', res);
 // @lc code=end
 
