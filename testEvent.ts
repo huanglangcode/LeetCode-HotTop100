@@ -164,3 +164,117 @@
 
 // };
 // console.log('obj :>> ', obj instanceof IPackageConfig);
+
+import child_process from "child_process"
+
+// let q = child_process.spawn("powershell.exe", ['[System.IO.Directory]::GetFiles("\\\\.\\\\pipe\\\\") | findstr mojo.4472.24656.11'])
+// q.stdout.on('data', (chunk) => {
+//     console.log('stdout :>> ', chunk.toString());
+// })
+let res = child_process.execSync("dir \\\\.\\pipe\\\\ | findstr INQQ")
+console.log('res :>> ', res.toString());
+
+
+
+
+var obj = {
+    "schema1": {
+        "$schema": "./$schema.json",
+        "id": "project1",
+        "displayName": "工商银行",
+        "moduleName": "project1",
+        "tag": ["银行项目"],
+        "icon": "898dce83fd155abe55b5cdc90e06137e.svg",
+        "color": "#539AEC",
+        "processList": [
+            {
+                "processType": "/flow1.flow",
+                "methodName": "/flow1.flow",
+                "displayName": "功能1",
+                "tags": ["人事部"],
+                "alias": []
+            },
+            {
+                "processType": "/flow2.flow",
+                "methodName": "/flow2.flow",
+                "displayName": "功能2",
+            },
+            {
+                "processType": "/flow3.flow",
+                "methodName": "/flow3.flow",
+                "displayName": "功能3",
+                "tags": ["人事部"],
+            },
+            {
+                "processType": "/flow4.flow",
+                "methodName": "/flow4.flow",
+                "displayName": "功能4",
+                "tags": ["行政部"],
+            },
+
+
+        ]
+    },
+    "schema2": {
+        "$schema": "./$schema.json",
+        "id": "project2",
+        "displayName": "农业银行",
+        "moduleName": "project2",
+        "icon": "898dce83fd155abe55b5cdc90e06137e.svg",
+        "color": "#539AEC",
+        "processList": [
+            {
+                "processType": "/flow1.flow",
+                "methodName": "/flow1.flow",
+                "displayName": "功能1",
+                "tags": ["企划部"],
+            },
+            {
+                "processType": "/flow2.flow",
+                "methodName": "/flow2.flow",
+                "displayName": "功能2",
+                "tags": ["技术部"],
+            },
+            {
+                "processType": "/flow3.flow",
+                "methodName": "/flow3.flow",
+                "displayName": "功能3",
+                "tags": ["技术部", "技术一部"],
+            },
+        ]
+    },
+    "schema3": {
+        "id": "project3",
+        "displayName": "建设银行",
+        "moduleName": "project3",
+        "tag": ["银行项目"],
+        "icon": "898dce83fd155abe55b5cdc90e06137e.svg",
+        "color": "#539AEC",
+        "processList": [
+            {
+                "processType": "/flow1.flow",
+                "methodName": "/flow1.flow",
+                "displayName": "功能1",
+                "tags": ["人事部"],
+                "alias": []
+            },
+            {
+                "processType": "/flow2.flow",
+                "methodName": "/flow2.flow",
+                "displayName": "功能2",
+            },
+            {
+                "processType": "/flow3.flow",
+                "methodName": "/flow3.flow",
+                "displayName": "功能3",
+                "tags": ["人事部"],
+            },
+            {
+                "processType": "/flow4.flow",
+                "methodName": "/flow4.flow",
+                "displayName": "功能4",
+                "tags": ["行政部"],
+            },
+        ]
+    },
+}

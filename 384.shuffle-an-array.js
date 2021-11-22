@@ -9,28 +9,26 @@
  */
 class Solution {
   constructor(nums) {
-    this.origin = nums
+    this.nums = nums
   }
   /**
-   * Resets the array to its original configuration and return it.
    * @return {number[]}
    */
   reset() {
-    return this.origin
+    return this.nums
   }
   /**
-   * Returns a random shuffling of the array.
    * @return {number[]}
    */
   shuffle() {
-    const shuffled = this.origin.slice()
-    const swap = (arr, i, j) => {
-      [arr[i], arr[j]] = [arr[j], arr[i]]
+    let res = [...this.nums]
+    const swap = (i, j) => {
+      [res[i], res[j]] = [res[j], res[i]]
     }
-    for (let i = 0; i < shuffled.length; i++) {
-      swap(shuffled, i, Math.floor(Math.random() * shuffled.length))
+    for (let i = 0; i < res.length; i++) {
+      swap(i, Math.floor(Math.random() * res.length))
     }
-    return shuffled;
+    return res
   }
 }
 /**
