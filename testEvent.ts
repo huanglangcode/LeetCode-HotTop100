@@ -161,120 +161,126 @@
 //     };
 // }
 // let obj = {
-
 // };
 // console.log('obj :>> ', obj instanceof IPackageConfig);
 
-import child_process from "child_process"
 
 // let q = child_process.spawn("powershell.exe", ['[System.IO.Directory]::GetFiles("\\\\.\\\\pipe\\\\") | findstr mojo.4472.24656.11'])
 // q.stdout.on('data', (chunk) => {
 //     console.log('stdout :>> ', chunk.toString());
 // })
-let res = child_process.execSync("dir \\\\.\\pipe\\\\ | findstr INQQ")
-console.log('res :>> ', res.toString());
 
 
-
-
-var obj = {
-    "schema1": {
-        "$schema": "./$schema.json",
-        "id": "project1",
-        "displayName": "工商银行",
-        "moduleName": "project1",
-        "tag": ["银行项目"],
-        "icon": "898dce83fd155abe55b5cdc90e06137e.svg",
-        "color": "#539AEC",
-        "processList": [
-            {
-                "processType": "/flow1.flow",
-                "methodName": "/flow1.flow",
-                "displayName": "功能1",
-                "tags": ["人事部"],
-                "alias": []
-            },
-            {
-                "processType": "/flow2.flow",
-                "methodName": "/flow2.flow",
-                "displayName": "功能2",
-            },
-            {
-                "processType": "/flow3.flow",
-                "methodName": "/flow3.flow",
-                "displayName": "功能3",
-                "tags": ["人事部"],
-            },
-            {
-                "processType": "/flow4.flow",
-                "methodName": "/flow4.flow",
-                "displayName": "功能4",
-                "tags": ["行政部"],
-            },
-
-
-        ]
+var obj2 = [
+    {
+        "processType": "/技术部/flow2.flow",
+        "methodName": "/技术部/flow2.flow",
+        "displayName": "功能2",
     },
-    "schema2": {
-        "$schema": "./$schema.json",
-        "id": "project2",
-        "displayName": "农业银行",
-        "moduleName": "project2",
-        "icon": "898dce83fd155abe55b5cdc90e06137e.svg",
-        "color": "#539AEC",
-        "processList": [
-            {
-                "processType": "/flow1.flow",
-                "methodName": "/flow1.flow",
-                "displayName": "功能1",
-                "tags": ["企划部"],
-            },
-            {
-                "processType": "/flow2.flow",
-                "methodName": "/flow2.flow",
-                "displayName": "功能2",
-                "tags": ["技术部"],
-            },
-            {
-                "processType": "/flow3.flow",
-                "methodName": "/flow3.flow",
-                "displayName": "功能3",
-                "tags": ["技术部", "技术一部"],
-            },
-        ]
+    {
+        "processType": "/技术部/flow22.flow",
+        "methodName": "/技术部/flow22.flow",
+        "displayName": "功能22",
     },
-    "schema3": {
-        "id": "project3",
-        "displayName": "建设银行",
-        "moduleName": "project3",
-        "tag": ["银行项目"],
-        "icon": "898dce83fd155abe55b5cdc90e06137e.svg",
-        "color": "#539AEC",
-        "processList": [
-            {
-                "processType": "/flow1.flow",
-                "methodName": "/flow1.flow",
-                "displayName": "功能1",
-                "tags": ["人事部"],
-                "alias": []
-            },
-            {
-                "processType": "/flow2.flow",
-                "methodName": "/flow2.flow",
-                "displayName": "功能2",
-            },
-            {
-                "processType": "/flow3.flow",
-                "methodName": "/flow3.flow",
-                "displayName": "功能3",
-                "tags": ["人事部"],
-            },
-            {
-                "processType": "/flow4.flow",
-                "methodName": "/flow4.flow",
-                "displayName": "功能4",
-                "tags": ["行政部"],
-            },
-        ]
+    {
+        "processType": "/企划部/flow1.flow",
+        "methodName": "/企划部/flow1.flow",
+        "displayName": "功能1",
     },
-}
+    {
+        "processType": "/技术部/技术一部/flow3.flow",
+        "methodName": "/技术部/技术一部/flow3.flow",
+        "displayName": "功能3",
+    },
+    {
+        "processType": "/技术部/技术一部/技术一部 - 1组/flow4.flow",
+        "methodName": "/技术部/技术一部/技术一部 - 1组/flow4.flow",
+        "displayName": "功能4",
+    },
+    {
+        "processType": "/技术部/技术一部/技术一部 - 2组/flow5.flow",
+        "methodName": "/技术部/技术一部/技术一部 - 2组/flow5.flow",
+        "displayName": "功能5",
+    },
+    {
+        "processType": "/技术部/技术二部/flow6.flow",
+        "methodName": "/技术部/技术二部/flow6.flow",
+        "displayName": "功能5",
+    },
+    {
+        "processType": "/技术部/flow222.flow",
+        "methodName": "/技术部/flow222.flow",
+        "displayName": "功能222",
+    },
+    {
+        "processType": "/root.flow",
+        "methodName": "/root.flow",
+        "displayName": "root",
+    },
+    {
+        "processType": "/main.flow",
+        "methodName": "/main.flow",
+        "displayName": "main",
+    },
+    {
+        "processType": "/folder1/main.flow",
+        "methodName": "/folder1/main.flow",
+        "displayName": "main",
+    },
+
+    {
+        "processType": "/folder1/main2.flow",
+        "methodName": "/folder1/main2.flow",
+        "displayName": "main2",
+    },
+]
+function generateSchemaTree(processList: any[]) {
+    processList.sort((a, b) => {
+        return b.processType.split('/').length - a.processType.split('/').length
+    })
+    let node: any = {};
+    processList.forEach((process) => {
+        let tags = process.processType.split("/").slice(1);
+        let p = node;
+        tags.forEach((ele: string) => {
+            if (p[ele] === undefined) {
+                p[ele] = {};
+            }
+            p = p[ele];
+        });
+        p.content = process
+    });
+    console.log('node :>> ', JSON.stringify(node));
+    let set = new Set()
+    const helper = (node: any) => {
+        let temp: Array<any> = [];
+        for (let prop in node) {
+            const curValue = node[prop];
+            let innerObj: any = { displayName: prop, subMenuList: [], processList: [] };
+            if (!curValue.content) {
+                for (const innerProp in curValue) {
+                    if (Object.prototype.hasOwnProperty.call(curValue, innerProp)) {
+                        const element = curValue[innerProp];
+                        if (element && element.content && !set.has(element.content.processType)) {
+                            set.add(element.content.processType)
+                            innerObj.processList.push(element.content)
+                        }
+                    }
+                }
+                innerObj.subMenuList = helper(node[prop]);
+                temp.push(innerObj);
+            } else {
+                if (!set.has(curValue.content.processType)) {
+                    set.add(curValue.content.processType)
+                    temp.push(curValue.content);
+                }
+            }
+        }
+        return temp;
+    };
+    let resArr = helper(node);
+    return resArr
+};
+
+let p = generateSchemaTree(obj2)
+console.log('p :>> ', JSON.stringify(p));

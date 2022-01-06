@@ -1,5 +1,4 @@
 import SimpleGitFactory from "simple-git";
-import archiver from "archiver";
 import * as fs from "fs";
 
 
