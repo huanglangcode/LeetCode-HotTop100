@@ -1,6 +1,5 @@
 /* Proxy Descriptor Types */
-
-import { EventEmitter } from "stream";
+import { SerializedIpc, serializedIpc as ipc } from "../xiajibazheteng/SerializedIpc";
 
 export enum ProxyPropertyType {
     Value = 'value',
@@ -53,7 +52,7 @@ export function isFunction(value: any): value is Function {
 
 const registrations: { [channel: string]: ProxyServerHandler | null } = {};
 
-export function registerProxy<T>(target: T, transport: EventEmitter): VoidFunction {
+export function registerProxy<T>(target: T, transport: SerializedIpc = ipc): VoidFunction {
     //@ts-ignore
     const channel = target.channel;
 
@@ -80,7 +79,7 @@ export function registerProxy<T>(target: T, transport: EventEmitter): VoidFuncti
     return () => unregisterProxy(channel, transport);
 }
 
-function unregisterProxy(channel: string, transport: any) {
+function unregisterProxy(channel: string, transport: SerializedIpc = ipc) {
     transport.removeAllListeners(channel);
     const server = registrations[channel];
 
@@ -90,7 +89,7 @@ function unregisterProxy(channel: string, transport: any) {
     registrations[channel] = null;
 }
 
-export function createProxy<T>(target: any, transport: EventEmitter): T {
+export function createProxy<T>(target: any, transport: SerializedIpc = ipc): T {
     const result = {};
     Object.getOwnPropertyNames(Object.getPrototypeOf(target)).forEach(propKey => {
         if (propKey !== 'constructor') {
@@ -105,7 +104,7 @@ export function createProxy<T>(target: any, transport: EventEmitter): T {
 }
 
 
-function getProperty(propertyType: ProxyPropertyType, propKey: string, channel: string, transport: any) {
+function getProperty(propertyType: ProxyPropertyType, propKey: string, channel: string, transport: SerializedIpc) {
     switch (propertyType) {
         case ProxyPropertyType.Value:
             return makeRequest({ type: RequestType.Get, propKey }, channel, transport);
@@ -125,14 +124,14 @@ function memoize<T>(getter: () => T): () => T {
     return () => (result ? result : result = getter());
 }
 
-function makeSyncRequest(request: Request, channel: string, transport: any): void {
+function makeSyncRequest(request: Request, channel: string, transport: SerializedIpc): void {
     return transport.sendSync(channel, request);
 }
 
-function makeRequest(request: Request, channel: string, transport: EventEmitter): Promise<any> {
+function makeRequest(request: Request, channel: string, transport: SerializedIpc): Promise<any> {
     console.log('request :>> ', request, 'channel', channel, 'transport', transport);
     const correlationId = (Math.random() * 100000).toString();
-    transport.emit(channel, transport, request, correlationId);
+    transport.send(channel, transport, request, correlationId);
 
     return new Promise((resolve, reject) => {
         transport.once(correlationId, (event: Event, response: any) => {

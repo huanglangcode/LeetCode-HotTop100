@@ -1,4 +1,3 @@
-import { EventEmitter } from "stream";
 import { registerProxy } from "./proxy";
 
 class B {
@@ -21,9 +20,9 @@ export class A extends B {
         console.log('.....10086.....');
         return 10086;
     }
-    public WCDMA() {
+    public async WCDMA(num) {
         console.log('.....10010.....');
-        return 10010;
+        return new Promise(resolve => setTimeout(() => { resolve(num) }, 1000));
     }
     public CDMA(callback: Function) {
         console.log('.....10000.....');
@@ -76,6 +75,5 @@ export const aa = new AA();
 // Object.getOwnPropertyNames(A.prototype).forEach(ele => console.log('A. :>> ', A.prototype[ele], typeof A.prototype[ele]));
 // Object:>> ['constructor', 'CMCC', 'WCDMA', 'CDMA']
 
-export const eventHandler = new EventEmitter();
-registerProxy(a, eventHandler);
+registerProxy(a);
 // registerProxy(aa, eventHandler);

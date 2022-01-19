@@ -4,6 +4,7 @@
     "target": "ES5",
     "outDir": "bin",
     "sourceMap": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "esModuleInterop": true
   }
 }
