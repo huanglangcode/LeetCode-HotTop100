@@ -61,7 +61,7 @@ var RequestType;
     RequestType["Reply"] = "Reply";
 })(RequestType = exports.RequestType || (exports.RequestType = {}));
 function isFunction(value) {
-    return value && typeof value === 'function';
+    return value && typeof value === "function";
 }
 exports.isFunction = isFunction;
 var registrations = {};
@@ -70,17 +70,18 @@ function registerProxy(target, transport) {
     var _this = this;
     //@ts-ignore
     var channel = target.channel;
-    if (registrations[channel]) {
-        throw new Error("Proxy object has already been registered on channel " + channel);
-    }
+    // if (registrations[channel]) {
+    //     throw new Error(`Proxy object has already been registered on channel ${channel}`);
+    // }
     var server = new ProxyServerHandler(target);
     registrations[channel] = server;
     transport.on(channel, function (event, request, correlationId) { return __awaiter(_this, void 0, void 0, function () {
         var sender;
         return __generator(this, function (_a) {
-            console.log('event, request,correlationId  :>> ', request, correlationId);
+            console.log("event, request,correlationId  :>> ", request, correlationId);
             sender = event.sender;
-            server.handleRequest(request, sender)
+            server
+                .handleRequest(request, sender)
                 .then(function (result) {
                 // if (!correlationId) {
                 //     event.returnValue = result;
@@ -91,11 +92,13 @@ function registerProxy(target, transport) {
                 //         event.send(correlationId, result)
                 //     }
                 // }
-                console.log('correlationId :>> ', correlationId);
-                console.log('result :>> ', result);
+                console.log("correlationId :>> ", correlationId);
+                console.log("result :>> ", result);
                 var webSocketArgs = JSON.stringify([correlationId, result]);
                 sender.send(webSocketArgs);
-            })["catch"](function (error) { return sender && sender.send(correlationId, { error: error.message }); });
+            })["catch"](function (error) {
+                return sender && sender.send(correlationId, { error: error.message });
+            });
             return [2 /*return*/];
         });
     }); });
@@ -110,7 +113,7 @@ function unregisterProxy(channel, transport) {
 function createProxy(target, transport) {
     var result = {};
     Object.getOwnPropertyNames(Object.getPrototypeOf(target)).forEach(function (propKey) {
-        if (propKey !== 'constructor') {
+        if (propKey !== "constructor") {
             var functionType_1 = ProxyPropertyType.Function;
             if (propKey.endsWith(RequestType.Sync)) {
                 functionType_1 = ProxyPropertyType.FunctionSync;
@@ -120,15 +123,19 @@ function createProxy(target, transport) {
             }
             Object.defineProperty(result, propKey, {
                 enumerable: true,
-                get: memoize(function () { return getProperty(functionType_1, propKey, target.channel, transport); })
+                get: memoize(function () {
+                    return getProperty(functionType_1, propKey, target.channel, transport);
+                })
             });
         }
     });
     Object.getOwnPropertyNames(target).forEach(function (propKey) {
-        if (propKey !== 'channel') {
+        if (propKey !== "channel") {
             Object.defineProperty(result, propKey, {
                 enumerable: true,
-                get: function () { return getProperty(ProxyPropertyType.Value, propKey, target.channel, transport); }
+                get: function () {
+                    return getProperty(ProxyPropertyType.Value, propKey, target.channel, transport);
+                }
             });
         }
     });
@@ -169,21 +176,21 @@ function getProperty(propertyType, propKey, channel, transport) {
 }
 function memoize(getter) {
     var result;
-    return function () { return (result ? result : result = getter()); };
+    return function () { return (result ? result : (result = getter())); };
 }
 function makeSyncRequest(request, channel, transport) {
     return transport.sendSync(channel, request);
 }
 function makeRequest(request, channel, transport) {
     var correlationId = (Math.random() * 100000).toString().slice(6);
-    console.log('request, channel, transport :>> ', request, channel, correlationId);
+    console.log("request, channel, transport :>> ", request, channel, correlationId);
     transport.send(channel, request, correlationId);
     return new Promise(function (resolve, reject) {
         var timer = setTimeout(function () {
-            reject('timeout');
-        }, 30000);
+            reject("timeout");
+        }, 3000);
         transport.once(correlationId, function (response) {
-            console.log(' once event response:>> ', response);
+            console.log(" once event response:>> ", response);
             clearTimeout(timer);
             if (!response) {
                 resolve(undefined);
@@ -238,4 +245,3 @@ var ProxyServerHandler = /** @class */ (function () {
     };
     return ProxyServerHandler;
 }());
-;

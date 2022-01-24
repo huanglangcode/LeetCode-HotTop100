@@ -14,7 +14,7 @@ connection.on("open", async () => {
     console.log('proxy.attr222 :>> ', await proxy.attr);
     await proxy.funcReply(100)
 })
-
+ 
 // (async () => {
 
 // })();

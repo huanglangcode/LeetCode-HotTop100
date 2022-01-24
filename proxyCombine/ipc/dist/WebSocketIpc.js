@@ -50,7 +50,9 @@ var WebSocketIpc = /** @class */ (function (_super) {
             for (var _i = 1; _i < arguments.length; _i++) {
                 args[_i - 1] = arguments[_i];
             }
-            if (_this.instance === undefined || _this.instance.send === undefined || _this.instance.send === null) {
+            if (_this.instance === undefined ||
+                _this.instance.send === undefined ||
+                _this.instance.send === null) {
                 log.error("WebSocketIpc instance don't have send method. instance=", _this.instance);
                 return;
             }
@@ -66,7 +68,7 @@ var WebSocketIpc = /** @class */ (function (_super) {
             }
             // console.log('channel, args, nargs :>> ', channel, args, nargs);
             var webSocketArgs = JSON.stringify(__spreadArrays([channel], args));
-            console.log('webSocketArgs :>> ', webSocketArgs);
+            console.log("webSocketArgs :>> ", webSocketArgs);
             _this.instance.send(webSocketArgs);
         };
         _this.sendSync = function (channel) {
@@ -75,7 +77,9 @@ var WebSocketIpc = /** @class */ (function (_super) {
             for (var _i = 1; _i < arguments.length; _i++) {
                 args[_i - 1] = arguments[_i];
             }
-            if (_this.instance === undefined || _this.instance.sendSync === undefined || _this.instance.sendSync === null) {
+            if (_this.instance === undefined ||
+                _this.instance.sendSync === undefined ||
+                _this.instance.sendSync === null) {
                 log.error("WebSocketIpc instance don't have sendSync method. instance=", _this.instance);
                 return;
             }
@@ -99,7 +103,7 @@ var WebSocketIpc = /** @class */ (function (_super) {
                     params = JSON.parse(params);
                 }
                 catch (error) { }
-                console.log('main data to String :>> ', params);
+                console.log("main data to String :>> ", params);
                 (_a = _this.instance).emit.apply(_a, __spreadArrays([params[0]], [{ sender: _this.instance }, params[1], params[2]]));
             });
             // this.instance.on("message", (data: Buffer) => {
@@ -119,7 +123,7 @@ var WebSocketIpc = /** @class */ (function (_super) {
                     params = JSON.parse(params);
                 }
                 catch (error) { }
-                console.log('renderer data to String :>> ', params);
+                console.log("renderer data to String :>> ", params);
                 _this.instance.emit(params[0], params[1]);
             });
             // this.instance.on("message", (data: Buffer) => {
@@ -133,14 +137,18 @@ var WebSocketIpc = /** @class */ (function (_super) {
             _this.instance.once(channel, listener);
         };
         _this.removeAllListeners = function (channel) {
-            if (_this.instance === undefined || _this.instance.removeAllListeners === undefined || _this.instance.removeAllListeners === null) {
+            if (_this.instance === undefined ||
+                _this.instance.removeAllListeners === undefined ||
+                _this.instance.removeAllListeners === null) {
                 log.error("WebSocketIpc instance don't have removeAllListeners  method. instance=", _this.instance);
                 return;
             }
             _this.instance.removeAllListeners(channel);
         };
         _this.removeListener = function (channel, listener) {
-            if (_this.instance === undefined || _this.instance.removeListener === undefined || _this.instance.removeListener === null) {
+            if (_this.instance === undefined ||
+                _this.instance.removeListener === undefined ||
+                _this.instance.removeListener === null) {
                 log.error("WebSocketIpc instance don't have removeListener method. instance=", _this.instance);
                 return;
             }

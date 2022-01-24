@@ -22,7 +22,6 @@
 提示：
 1 <= num.length <= 35
 num 仅由数字（0 - 9）组成
-
  */
 
 // @lc code=start
@@ -31,16 +30,32 @@ num 仅由数字（0 - 9）组成
  * @return {boolean}
  */
 var isAdditiveNumber = function (num) {
-    const helper = (last, length, endIdx) => {
+    let maxLength = Math.floor(num.length / 2)
+    if (num.length < 3) return false;
+    for (let i = 0; i < maxLength; i++) {
+        for (let j = i + 1; j < num.length; j++) {
+            const num1 = num.slice(0, i + 1);
+            const num2 = num.slice(i + 1, j + 1);
+            const rest = num.slice(j + 1);
+            if (num1.length > 1 && num1[0] === '0') return false;
+            if (num2.length > 1 && num2[0] === '0') break;
+            if (rest.length < num1.length || rest.length < num2.length) break;
+            if (isValid(num1, num2, rest)) return true;
+        }
+    }
 
+    function isValid(num1, num2, rest) {
+        if (!rest.length) return true;
+        const sum = (+num1 + +num2).toString();
+        if (!rest.startsWith(sum)) return false;
+        return isValid(num2, sum, rest.slice(sum.length));
     }
-    // 假定最后一个数 然后往前推 前两个数 一直到idx为0
-    // 最后一个数的length为 1~ num.length/3
-    for (let i = 1; i <= Math.floor(num.length / 3); i++) {
-        helper(num.slice(num.length - i), i, num.length - i)
-    }
+    return false;
 };
 // @lc code=end
 
 // isAdditiveNumber("112358")
-isAdditiveNumber("199100199")
+let r = isAdditiveNumber("99999998199999999")
+console.log('r :>> ', r);
+
+//  99999998199999999
