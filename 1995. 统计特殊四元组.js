@@ -53,7 +53,7 @@ var countQuadruplets = function (nums) {
     return res
 };
 // 8 9 11 28 52 73 92
-console.log('countQuadruplets :>> ', countQuadruplets([8, 73, 11, 9, 28, 92, 52]));
+// console.log('countQuadruplets :>> ', countQuadruplets([8, 73, 11, 9, 28, 92, 52]));
 
 function dp(nums) {
     const dp = Array.from(new Array(4), () => new Array(101).fill(0))
@@ -134,3 +134,6 @@ function bf(nums) {
     }
     return res;
 }
+
+
+exports.main = countQuadruplets
