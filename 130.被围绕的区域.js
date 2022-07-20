@@ -5,10 +5,6 @@
  */
 
 // @lc code=start
-/**
- * @param {character[][]} board
- * @return {void} Do not return anything, modify board in-place instead.
- */
 const DIRS = [
     [-1, 0],
     [0, 1],
@@ -55,5 +51,50 @@ var solve = function (board) {
     }
     return board
 };
+
+const twoD2OneD = (i, j, m) => {
+    return m * i + j
+}
 // @lc code=end
 
+var board = [
+    ["X", "O", "O", "X", "X", "X", "O", "X", "O", "O"],
+    ["X", "O", "X", "X", "X", "X", "X", "X", "X", "X"],
+    ["X", "X", "X", "X", "O", "X", "X", "X", "X", "X"],
+    ["X", "O", "X", "X", "X", "O", "X", "X", "X", "O"],
+    ["O", "X", "X", "X", "O", "X", "O", "X", "O", "X"],
+    ["X", "X", "O", "X", "X", "O", "O", "X", "X", "X"],
+    ["O", "X", "X", "O", "O", "X", "O", "X", "X", "O"],
+    ["O", "X", "X", "X", "X", "X", "O", "X", "X", "X"],
+    ["X", "O", "O", "X", "X", "O", "X", "X", "O", "O"],
+    ["X", "X", "X", "O", "O", "X", "O", "X", "X", "O"]
+]
+
+let real = [
+    ["X", "O", "O", "X", "X", "X", "O", "X", "O", "O"],
+    ["X", "X", "X", "X", "X", "X", "X", "X", "X", "X"],
+    ["X", "X", "X", "X", "X", "X", "X", "X", "X", "X"],
+    ["X", "X", "X", "X", "X", "X", "X", "X", "X", "O"],
+    ["O", "X", "X", "X", "X", "X", "X", "X", "X", "X"],
+    ["X", "X", "X", "X", "X", "X", "X", "X", "X", "X"],
+    ["O", "X", "X", "X", "X", "X", "X", "X", "X", "O"],
+    ["O", "X", "X", "X", "X", "X", "X", "X", "X", "X"],
+    ["X", "X", "X", "X", "X", "X", "X", "X", "X", "O"],
+    ["X", "X", "X", "O", "O", "X", "O", "X", "X", "O"]
+]
+
+let exp = [
+    ["X", "O", "O", "X", "X", "X", "O", "X", "O", "O"],
+    ["X", "O", "X", "X", "X", "X", "X", "X", "X", "X"],
+    ["X", "X", "X", "X", "X", "X", "X", "X", "X", "X"],
+    ["X", "X", "X", "X", "X", "X", "X", "X", "X", "O"],
+    ["O", "X", "X", "X", "X", "X", "X", "X", "X", "X"],
+    ["X", "X", "X", "X", "X", "X", "X", "X", "X", "X"],
+    ["O", "X", "X", "X", "X", "X", "X", "X", "X", "O"],
+    ["O", "X", "X", "X", "X", "X", "X", "X", "X", "X"],
+    ["X", "X", "X", "X", "X", "X", "X", "X", "O", "O"],
+    ["X", "X", "X", "O", "O", "X", "O", "X", "X", "O"]
+]
+
+let res = solve(board)
+console.log('res', res);
