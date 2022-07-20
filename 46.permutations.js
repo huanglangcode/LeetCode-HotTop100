@@ -23,10 +23,8 @@ var permute = function (s) {
             if (hash[i]) {
                 continue;
             }
-            subStr.push(s[i]);
             hash[i] = true;
-            helper(subStr);
-            subStr.pop();
+            helper(subStr.concat(s[i]));
             hash[i] = false;
         }
     };
@@ -34,6 +32,7 @@ var permute = function (s) {
     return res;
 };
 
-permute([1, 2, 3]);
+let res = permute([1, 2, 3]);
+console.log('res :>> ', res);
 // @lc code=end
 

@@ -35,5 +35,5 @@ var permuteUnique = function (nums) {
 };
 // @lc code=end
 
-permuteUnique([1, 1, 2]);
-permuteUnique([1, 2, 3]);
+let res = permuteUnique([1, 2, 3]);
+console.log('res :>> ', res);

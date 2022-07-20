@@ -37,33 +37,27 @@ words[i] 由小写英文字母组成
  * @return {number[]}
  */
 var findSubstring = function (s, words) {
-    let total = words[0].length * words.length
+    let l = words[0].length, total = l * words.length
     if (total > s.length) return []
     let map = {}
     for (let i = 0; i < words.length; i++) {
         map[words[i]] = map[words[i]] + 1 || 1
     }
     let ans = []
-    const helper = (sub) => {
-        let seen = {};
-        for (let i = 0; i < sub.length; i += words[0].length) {
-            let word = sub.slice(i, i + words[0].length);
-            seen[word] = seen[word] + 1 || 1
-            if (seen[word] > map[word]) {
-                return false
+    loop:
+    for (let i = 0; i < s.length - total + 1; i++) {
+        let map2 = {}
+        for (let j = i; j < i + total; j += l) {
+            let curr = s.slice(j, j + l)
+            if (!map[curr]) {
+                continue loop
+            }
+            map2[curr] = map2[curr] + 1 || 1
+            if (map2[curr] > map[curr]) {
+                continue loop
             }
         }
-
-        for (let key in map) {
-            if (map[key] !== seen[key]) return false;
-        }
-        return true;
-    }
-    for (let i = 0; i < s.length - total + 1; i++) {
-        const sub = s.slice(i, i + total)
-        if (helper(sub)) {
-            ans.push(i)
-        }
+        ans.push(i)
     }
     return ans
 };
@@ -73,7 +67,7 @@ var s = "abababababababababababababababababababababababababababababababababababa
 var words = ["ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba", "ab", "ba"]
 
 
-// s = "barfoofoobarthefoobarman", words = ["bar", "foo", "the"]
+s = "barfoofoobarthefoobarman", words = ["bar", "foo", "the"]
 console.time(1)
 let res = findSubstring(s, words)
 console.timeEnd(1)

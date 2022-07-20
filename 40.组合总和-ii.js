@@ -62,3 +62,21 @@ var combinationSum2 = function (candidates, target) {
 // combinationSum2([10, 1, 2, 7, 6, 1, 5], 8)
 // combinationSum2([2, 5, 2, 1, 2], 5)
 // combinationSum2([1, 1, 1, 3, 3, 5], 8)
+
+var requestRetryScope = (remainRetryCnt, retryInterval, cb) => {
+    try {
+        cb()
+        return remainRetryCnt
+    } catch (error) {
+        if (remainRetryCnt > 0) {
+            setInterval(() => {
+                requestRetryScope(remainRetryCnt - 1, retryInterval, cb)
+            }, retryInterval);
+        }
+        throw new Error()
+    }
+}
+
+var remainRetryCnt = 5, retryInterval = 1000, cb = () => { console.log('haha') }
+remainRetryCnt = requestRetryScope(5, 1000, cb)
+remainRetryCnt = requestRetryScope(remain, 1000, cb)

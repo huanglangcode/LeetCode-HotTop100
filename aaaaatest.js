@@ -21,26 +21,16 @@
 // for (let i = 0; i < 100; i++) {
 //     request(i)
 // }
+let cnt = 0
 
-var DepGraph = require('dependency-graph').DepGraph;
+const helper = (n) => {
+    cnt++
+    if (n === 1) {
+        return 1
+    }
+    return helper(n - 1) + 1
+}
 
-var graph = new DepGraph();
-
-/**
- * 假设有
- * 主流程 引用了 flow1
- * 主流程 引用了 flow2
- * flow1 引用了 flow3 
- */
-
-graph.addNode("主流程")
-graph.addNode("flow1")
-graph.addNode("flow2")
-graph.addNode("flow3")
-
-graph.addDependency("主流程", "flow1")
-graph.addDependency("主流程", "flow2")
-graph.addDependency("flow1", "flow3")
-
-let res = graph.directDependenciesOf("主流程")
+let res = helper(12508)
+console.log('cnt :>> ', cnt);
 console.log('res :>> ', res);

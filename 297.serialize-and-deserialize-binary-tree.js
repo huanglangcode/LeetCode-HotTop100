@@ -38,7 +38,6 @@ var serialize = function (root) {
             queue.push(curr.right);
         }
     }
-    console.log('result :>> ', result);
     return result.toString();
 };
 
@@ -50,24 +49,34 @@ var serialize = function (root) {
  */
 var deserialize = function (data) {
     let arr = data.split(",");
-    // ['1', '2', '3', 'null', 'null', '4', '5', 'null', 'null','null', 'null']
-    let root = new TreeNode(+arr[0]);
-    let queue = [root];
-    for (let i = 1; i < arr.length; i++) {
-        let parent = queue.shift();
-        if (arr[i] !== 'null') {
-            let left = new TreeNode(+arr[i]);
-            parent.left = left;
-            queue.push(left);
-        }
-        if (arr[++i] !== 'null' && i < arr.length) {
-            let right = new TreeNode(+arr[i]);
-            parent.right = right;
-            queue.push(right);
+    return buildTree(arr)
+};
+
+const buildTree = (arr) => {
+    const set = new Set()
+    let root = new TreeNode(+arr[0])
+    set.add(0)
+    const queue = [root]
+    let idx = 0
+    while (queue.length) {
+        let length = queue.length
+        while (length--) {
+            let curr = queue.pop()
+            if (Number.isInteger(+arr[idx * 2 + 1]) && !set.has(idx * 2 + 1)) {
+                set.add(idx * 2 + 1)
+                curr.left = new TreeNode(+arr[idx * 2 + 1])
+                queue.unshift(curr.left)
+            }
+            if (Number.isInteger(+arr[idx * 2 + 2]) && !set.has(idx * 2 + 2)) {
+                set.add(idx * 2 + 2)
+                curr.right = new TreeNode(+arr[idx * 2 + 2])
+                queue.unshift(curr.right)
+            }
+            idx++
         }
     }
-    return root;
-};
+    return root
+}
 
 /**
  * Your functions will be called as such:

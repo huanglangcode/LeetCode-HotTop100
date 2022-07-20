@@ -141,7 +141,6 @@
 // // }
 // console.log('JSON.stringify(result) :>> ', JSON.stringify(result));
 
-
 // type FileId = string;
 // type PackageVersion = string;
 // type PackageVersionRange = string;
@@ -164,123 +163,165 @@
 // };
 // console.log('obj :>> ', obj instanceof IPackageConfig);
 
-
 // let q = child_process.spawn("powershell.exe", ['[System.IO.Directory]::GetFiles("\\\\.\\\\pipe\\\\") | findstr mojo.4472.24656.11'])
 // q.stdout.on('data', (chunk) => {
 //     console.log('stdout :>> ', chunk.toString());
 // })
 
+// var obj2 = [
+//     {
+//         "processType": "/技术部/flow2.flow",
+//         "methodName": "/技术部/flow2.flow",
+//         "displayName": "功能2",
+//     },
+//     {
+//         "processType": "/技术部/flow22.flow",
+//         "methodName": "/技术部/flow22.flow",
+//         "displayName": "功能22",
+//     },
+//     {
+//         "processType": "/企划部/flow1.flow",
+//         "methodName": "/企划部/flow1.flow",
+//         "displayName": "功能1",
+//     },
+//     {
+//         "processType": "/技术部/技术一部/flow3.flow",
+//         "methodName": "/技术部/技术一部/flow3.flow",
+//         "displayName": "功能3",
+//     },
+//     {
+//         "processType": "/技术部/技术一部/技术一部 - 1组/flow4.flow",
+//         "methodName": "/技术部/技术一部/技术一部 - 1组/flow4.flow",
+//         "displayName": "功能4",
+//     },
+//     {
+//         "processType": "/技术部/技术一部/技术一部 - 2组/flow5.flow",
+//         "methodName": "/技术部/技术一部/技术一部 - 2组/flow5.flow",
+//         "displayName": "功能5",
+//     },
+//     {
+//         "processType": "/技术部/技术二部/flow6.flow",
+//         "methodName": "/技术部/技术二部/flow6.flow",
+//         "displayName": "功能5",
+//     },
+//     {
+//         "processType": "/技术部/flow222.flow",
+//         "methodName": "/技术部/flow222.flow",
+//         "displayName": "功能222",
+//     },
+//     {
+//         "processType": "/root.flow",
+//         "methodName": "/root.flow",
+//         "displayName": "root",
+//     },
+//     {
+//         "processType": "/main.flow",
+//         "methodName": "/main.flow",
+//         "displayName": "main",
+//     },
+//     {
+//         "processType": "/folder1/main.flow",
+//         "methodName": "/folder1/main.flow",
+//         "displayName": "main",
+//     },
 
-var obj2 = [
-    {
-        "processType": "/技术部/flow2.flow",
-        "methodName": "/技术部/flow2.flow",
-        "displayName": "功能2",
-    },
-    {
-        "processType": "/技术部/flow22.flow",
-        "methodName": "/技术部/flow22.flow",
-        "displayName": "功能22",
-    },
-    {
-        "processType": "/企划部/flow1.flow",
-        "methodName": "/企划部/flow1.flow",
-        "displayName": "功能1",
-    },
-    {
-        "processType": "/技术部/技术一部/flow3.flow",
-        "methodName": "/技术部/技术一部/flow3.flow",
-        "displayName": "功能3",
-    },
-    {
-        "processType": "/技术部/技术一部/技术一部 - 1组/flow4.flow",
-        "methodName": "/技术部/技术一部/技术一部 - 1组/flow4.flow",
-        "displayName": "功能4",
-    },
-    {
-        "processType": "/技术部/技术一部/技术一部 - 2组/flow5.flow",
-        "methodName": "/技术部/技术一部/技术一部 - 2组/flow5.flow",
-        "displayName": "功能5",
-    },
-    {
-        "processType": "/技术部/技术二部/flow6.flow",
-        "methodName": "/技术部/技术二部/flow6.flow",
-        "displayName": "功能5",
-    },
-    {
-        "processType": "/技术部/flow222.flow",
-        "methodName": "/技术部/flow222.flow",
-        "displayName": "功能222",
-    },
-    {
-        "processType": "/root.flow",
-        "methodName": "/root.flow",
-        "displayName": "root",
-    },
-    {
-        "processType": "/main.flow",
-        "methodName": "/main.flow",
-        "displayName": "main",
-    },
-    {
-        "processType": "/folder1/main.flow",
-        "methodName": "/folder1/main.flow",
-        "displayName": "main",
-    },
+//     {
+//         "processType": "/folder1/main2.flow",
+//         "methodName": "/folder1/main2.flow",
+//         "displayName": "main2",
+//     },
+// ]
+// function generateSchemaTree(processList: any[]) {
+//     processList.sort((a, b) => {
+//         return b.processType.split('/').length - a.processType.split('/').length
+//     })
+//     let node: any = {};
+//     processList.forEach((process) => {
+//         let tags = process.processType.split("/").slice(1);
+//         let p = node;
+//         tags.forEach((ele: string) => {
+//             if (p[ele] === undefined) {
+//                 p[ele] = {};
+//             }
+//             p = p[ele];
+//         });
+//         p.content = process
+//     });
+//     console.log('node :>> ', JSON.stringify(node));
+//     let set = new Set()
+//     const helper = (node: any) => {
+//         let temp: Array<any> = [];
+//         for (let prop in node) {
+//             const curValue = node[prop];
+//             let innerObj: any = { displayName: prop, subMenuList: [], processList: [] };
+//             if (!curValue.content) {
+//                 for (const innerProp in curValue) {
+//                     if (Object.prototype.hasOwnProperty.call(curValue, innerProp)) {
+//                         const element = curValue[innerProp];
+//                         if (element && element.content && !set.has(element.content.processType)) {
+//                             set.add(element.content.processType)
+//                             innerObj.processList.push(element.content)
+//                         }
+//                     }
+//                 }
+//                 innerObj.subMenuList = helper(node[prop]);
+//                 temp.push(innerObj);
+//             } else {
+//                 if (!set.has(curValue.content.processType)) {
+//                     set.add(curValue.content.processType)
+//                     temp.push(curValue.content);
+//                 }
+//             }
+//         }
+//         return temp;
+//     };
+//     let resArr = helper(node);
+//     return resArr
+// };
 
-    {
-        "processType": "/folder1/main2.flow",
-        "methodName": "/folder1/main2.flow",
-        "displayName": "main2",
-    },
-]
-function generateSchemaTree(processList: any[]) {
-    processList.sort((a, b) => {
-        return b.processType.split('/').length - a.processType.split('/').length
-    })
-    let node: any = {};
-    processList.forEach((process) => {
-        let tags = process.processType.split("/").slice(1);
-        let p = node;
-        tags.forEach((ele: string) => {
-            if (p[ele] === undefined) {
-                p[ele] = {};
-            }
-            p = p[ele];
-        });
-        p.content = process
-    });
-    console.log('node :>> ', JSON.stringify(node));
-    let set = new Set()
-    const helper = (node: any) => {
-        let temp: Array<any> = [];
-        for (let prop in node) {
-            const curValue = node[prop];
-            let innerObj: any = { displayName: prop, subMenuList: [], processList: [] };
-            if (!curValue.content) {
-                for (const innerProp in curValue) {
-                    if (Object.prototype.hasOwnProperty.call(curValue, innerProp)) {
-                        const element = curValue[innerProp];
-                        if (element && element.content && !set.has(element.content.processType)) {
-                            set.add(element.content.processType)
-                            innerObj.processList.push(element.content)
-                        }
-                    }
-                }
-                innerObj.subMenuList = helper(node[prop]);
-                temp.push(innerObj);
-            } else {
-                if (!set.has(curValue.content.processType)) {
-                    set.add(curValue.content.processType)
-                    temp.push(curValue.content);
-                }
-            }
-        }
-        return temp;
-    };
-    let resArr = helper(node);
-    return resArr
-};
+// let p = generateSchemaTree(obj2)
+// console.log('p :>> ', JSON.stringify(p));
 
-let p = generateSchemaTree(obj2)
-console.log('p :>> ', JSON.stringify(p));
+console.log("1");
+
+setTimeout(function () {
+  console.log("2");
+  process.nextTick(function () {
+    console.log("3");
+  });
+  new Promise(function (resolve) {
+    console.log("4");
+    resolve("5");
+  }).then(function (v) {
+    console.log(v);
+  });
+});
+setImmediate(() => {
+  console.log("5.1");
+});
+process.nextTick(function () {
+  console.log("6");
+});
+
+setImmediate(() => {
+  console.log("6.1");
+});
+new Promise(function (resolve) {
+  console.log("7");
+  resolve("8");
+}).then(function (e) {
+  console.log(e);
+});
+
+setTimeout(function () {
+  console.log("9");
+  process.nextTick(function () {
+    console.log("10");
+  });
+  new Promise(function (resolve) {
+    console.log("11");
+    resolve(3);
+  }).then(function () {
+    console.log("12");
+  });
+});
