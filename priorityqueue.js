@@ -1,4 +1,4 @@
-class PriorityQueue {
+export class PriorityQueue {
     constructor(
         compare = (a, b) => a[0] - b[0] < 0
     ) {

@@ -21,12 +21,15 @@ let server: WebSocketIpc;
 
 wss.on("connection", (ws: WebSocket, request: IncomingMessage) => {
   console.log("server , request.url :>> ", server, request.url);
+  ws.onmessage = (event) => {
+    console.log("onmessage data :>> ", event.data);
+  };
   //   const channel = request.url.split("/")[1];
   //   if (!server) {
-  server = new WebSocketIpc(ws);
-  //   }
-  //   console.log("channel :>> ", channel);
-  registerProxy(a, server);
-  registerProxy(b, server);
+  // server = new WebSocketIpc(ws);
+  // //   }
+  // //   console.log("channel :>> ", channel);
+  // registerProxy(a, server);
+  // registerProxy(b, server);
   //   set.add(channel);
 });

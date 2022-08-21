@@ -12,29 +12,29 @@
  * @return {string[]}
  */
 var restoreIpAddresses = function (s) {
-    if (s.length < 4) { return [] }
-    let res = []
-    for (let i = 1; i < s.length - 2; i++) {
-        let x = s.slice(0, i)
-        if (!checker(x)) {
-            continue
+    const result = []
+
+    const helper = (arr, str) => {
+        if (arr.length === 3) {
+            if (isValid(str)) result.push([...arr, str]);
+            return;
         }
-        for (let j = i + 1; j < s.length - 1; j++) {
-            let y = s.slice(i, j)
-            if (!checker(y)) {
-                continue
-            }
-            for (let k = j + 1; k < s.length; k++) {
-                let z = s.slice(j, k)
-                let l = s.slice(k)
-                if (!checker(z) || !checker(l)) {
-                    continue
-                }
-                res.push(`${x}.${y}.${z}.${l}`)
-            }
+
+        for (let i = 1; i < 4; i++) {
+            let subStr = str.slice(0, i);
+            if (!isValid(subStr)) continue;
+            helper([...arr, subStr], str.slice(i));
         }
     }
-    return res
+
+    function isValid(str) {
+        if (+str > 255 || !str.length) return false;
+        if (str.length > 1 && str.startsWith('0')) return false;
+        return true;
+    }
+
+    helper([], s);
+    return result.map(x => x.join('.'))
 };
 
 var checker = (str) => {
@@ -47,4 +47,5 @@ var checker = (str) => {
     return true
 }
 // @lc code=end
-restoreIpAddresses("101023")
+let r = restoreIpAddresses("101023")
+console.log('r :>> ', r);

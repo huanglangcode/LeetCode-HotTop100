@@ -11,8 +11,7 @@
  */
 var sortArray = function (nums) {
     quickSort(nums, 0, nums.length - 1);
-    // return mergeSort(nums);
-    console.log('nums :>> ', nums);
+    return nums
 };
 
 var mergeSort = (nums) => {
@@ -63,17 +62,44 @@ var partition = (nums, left, right) => {
             idx++;
         }
     }
-    console.log('nums :>> ', nums);
     [nums[idx - 1], nums[pivot]] = [nums[pivot], nums[idx - 1]];
     return idx - 1;
 };
 // @lc code=end
 
-var arr = [5, 1, 3, 7, 2, 4, 6, 8, 2, 5, 7, 6, 4, 1, 2, 4, 6, 7, 5, 8, 7, 9, 10]
-partition(arr, 0, arr.length - 1);
+const sortArrayV2 = (arr) => {
+    if (arr.length < 2) {
+        return arr;
+    }
+    let mid = arr.length >> 1
+    let left = arr.slice(0, mid)
+    let right = arr.slice(mid)
+    return mergeV2(sortArrayV2(left), sortArrayV2(right))
+}
 
-// 7 -> 6 3 1 4 2 5  7  8 9
-// 6 -> 3 1 4 2 5  6    8 -> 8  9
-// 3 -> 1 2  3  4 5   
-// 1 -> 1  2    4 -> 4  5
-// 1 2 3 4 5 6 7 8 9
+const mergeV2 = (arr1, arr2) => {
+    let temp = []
+    while (arr1.length && arr2.length) {
+        if (arr1[0] < arr2[0]) {
+            temp.push(arr1.shift())
+        } else {
+            temp.push(arr2.shift())
+        }
+    }
+    if (arr1.length) {
+        temp.push(...arr1)
+    }
+    if (arr2.length) {
+        temp.push(...arr2)
+    }
+    return temp
+}
+
+
+
+var arr = [5, 1, 3, 7, 2, 4, 6, 8, 2, 5, 7, 6, 4, 1, 2, 4, 6, 7, 5, 8, 7, 9, 10]
+// sortArray(arr);
+// 将数组拆分成2个 4个 8个... 一直拆到拆无可拆 然后向上merge
+let res = sortArrayV2(arr)
+
+console.log('res :>> ', res);
