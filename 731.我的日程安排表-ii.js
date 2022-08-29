@@ -9,7 +9,7 @@
 class MyCalendarTwo {
     constructor() {
         this.calendar = [];
-        this.overlaps = [];
+        this.intersection = [];
     }
     /**
      * @param {number} start
@@ -17,13 +17,13 @@ class MyCalendarTwo {
      * @return {boolean}
      */
     book(start, end) {
-        for (let [s, e] of this.overlaps) {
-            if (start < e && end > s)
+        for (let [s, e] of this.intersection) {
+            if (start < e && end > s) // 如果和已经产生过交集的列表还能产生交集.
                 return false;
         }
         for (let [s, e] of this.calendar) {
-            if (start < e && end > s) {
-                this.overlaps.push([Math.max(s, start), Math.min(e, end)]);
+            if (start < e && end > s) { // 把产生过交集的部分保存下来
+                this.intersection.push([Math.max(s, start), Math.min(e, end)]);
             }
         }
         this.calendar.push([start, end]);

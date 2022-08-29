@@ -30,7 +30,14 @@ mult 表达式表示为 "(mult e1 e2)" ，其中 mult 总是以字符串 "mult" 
  * @return {number}
  */
 var evaluate = function (expression) {
-
+    let token = expression.split(" ")
+    console.log('token :>> ', token);
 };
 // @lc code=end
 
+var expression = "(let x 12 (mult x (let x 3 y 4 (add x y))))"
+
+// expression = "(let x 1 y 2 x (add x y) (add x y))"
+// 12 * 7 84
+
+evaluate(expression)

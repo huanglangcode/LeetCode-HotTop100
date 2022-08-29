@@ -1,3 +1,5 @@
+import { EventEmitter } from "stream";
+
 export interface Listener<T> {
     (event: T, params: any): any;
 }

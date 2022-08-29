@@ -70,42 +70,45 @@ for (const fileName of arr) {
         let str = fs.readFileSync(path.resolve(basePath, fileName), { encoding: 'utf-8' })
         let obj = JSON.parse(str)
         for (const process of obj) {
-            if (processSet2.has(process.displayName)) {
-                console.log('process :>> ', process);
-                let idx = process.content.findIndex(ele => ele.id === "sheet_name")
-                process.content.splice(idx, 1,
-                    {
-                        "type": "input",
-                        "id": "type",
-                        "name": "选择名称/序号",
-                        "inputType": {
-                            "typeId": "string"
-                        },
-                        "useOptions": [
-                            {
-                                "displayName": "工作表名称",
-                                "value": "string"
-                            },
-                            {
-                                "displayName": "工作表序号",
-                                "value": "number"
-                            }
-                        ],
-                        "defaultValue": "string",
-                        "optional": false,
-                        "desc": "选择目标工作表（Sheet）的名称/序号"
-                    },
-                    {
-                        "type": "input",
-                        "id": "sheet_name",
-                        "name": "工作表名称/序号",
-                        "hint": "请输入工作表名称/序号",
-                        "inputType": "@type",
-                        "optional": false,
-                        "enableJSExpression": true,
-                        "desc": "输入目标工作表（Sheet）的名称/序号"
-                    })
+            // if (processSet2.has(process.displayName)) {
+            console.log('process :>> ', process);
+            let idx = process.content.findIndex(ele => ele.id === "is_save")
+            if (idx !== -1) {
+                process.content[idx].defaultValue = false
             }
+            // process.content.splice(idx, 1,
+            //     {
+            //         "type": "input",
+            //         "id": "type",
+            //         "name": "选择名称/序号",
+            //         "inputType": {
+            //             "typeId": "string"
+            //         },
+            //         "useOptions": [
+            //             {
+            //                 "displayName": "工作表名称",
+            //                 "value": "string"
+            //             },
+            //             {
+            //                 "displayName": "工作表序号",
+            //                 "value": "number"
+            //             }
+            //         ],
+            //         "defaultValue": "string",
+            //         "optional": false,
+            //         "desc": "选择目标工作表（Sheet）的名称/序号"
+            //     },
+            //     {
+            //         "type": "input",
+            //         "id": "sheet_name",
+            //         "name": "工作表名称/序号",
+            //         "hint": "请输入工作表名称/序号",
+            //         "inputType": "@type",
+            //         "optional": false,
+            //         "enableJSExpression": true,
+            //         "desc": "输入目标工作表（Sheet）的名称/序号"
+            //     })
+            // }
             // if (processSet.has(process.displayName)) {
             //     console.log('process :>> ', process);
             //     // process.content.push({
