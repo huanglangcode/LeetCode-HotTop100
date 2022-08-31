@@ -1,10 +1,26 @@
 {
-  "compilerOptions": {
-    "module": "commonjs",
-    "target": "es2017",
-    "outDir": "bin",
-    "sourceMap": true,
-    "experimentalDecorators": true,
-    "esModuleInterop": true
-  }
+    "compilerOptions": {
+        "target": "ES2019",
+        "lib": ["ES2020", "DOM"],
+        "module": "CommonJS",
+        "strict": true,
+        "noUnusedLocals": false,
+        "noImplicitAny": false,
+        "noImplicitReturns": true,
+        "allowSyntheticDefaultImports": true,
+        "skipLibCheck": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "baseUrl": ".",
+        "typeRoots": ["node_modules/@types"],
+        "paths": {
+            "~/*": ["./*"]
+        },
+        "outDir": "dist",
+        "declaration": true,
+        "sourceMap": true
+    },
+    "exclude": ["./test/**/*", "./dist/**/*", "./data/**/*", "./lib/**/*"]
 }

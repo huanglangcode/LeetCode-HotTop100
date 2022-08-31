@@ -66,7 +66,7 @@ var searchRange = function (nums, target) {
   return [first, second - 1];
 
 };
-searchRange([5, 7, 7, 8, 8, 10], 8);
+// searchRange([5, 7, 7, 8, 8, 10], 8);
 // searchRange([2, 2], 2);
 // @lc code=end
 
@@ -93,3 +93,25 @@ searchRange([5, 7, 7, 8, 8, 10], 8);
 //     let ele2 = searchIndex(nums, target, ele1)
 //     return [ele1, ele2 - 1]
 // };
+
+
+const searchFirstBigThanTarget = (arr, target, l) => {
+  let r = arr.length - 1;
+  while (l < r) {
+    const mid = l + (r - l >> 1);
+    const curr = arr[mid];
+    if (curr <= target) {
+      l = mid + 1;
+    } else if (curr > target) {
+      r = mid;
+    }
+  }
+  console.log('l :>> ', l);
+  return l;
+};
+
+
+var arr = [1, 2, 2, 2, 3, 4, 5, 6]
+
+let idx = searchFirstBigThanTarget(arr, 2, 0)
+console.log('idx', idx)

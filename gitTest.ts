@@ -16,7 +16,9 @@ const f1 = async () => {
     // let res1 = await git1.status()
     // console.log('res1 :>> ', res1);
     let git = SimpleGitFactory()
-    await git.cwd({ path: "C:\\Users\\hongji\\Documents\\UiPath\\repo", root: true })
+    await git.cwd({ path: "D:\\bug\\gitTest", root: true })
+    let r = await git.getConfig("init.defaultBranch", "global")
+    console.log('r', r)
     // await git.cwd({ path: "C:\\Users\\hongji\\AppData\\Roaming\\speed_dev\\data\\designer\\SpeedProject\\Git项目001", root: true })
     // await git.branch([`--set-upstream-to=origin/${mainBranch || "main"} main`]);
     // const res = await git.pull([
@@ -25,9 +27,10 @@ const f1 = async () => {
     //     "--allow-unrelated-histories",
     //     "--rebase=false",
     // ]);
-    const res = await git.revparse(["--abbrev-ref", "HEAD"])
-    // let res = await git.pull(["--allow-unrelated-histories", "--rebase=false"])
-    console.log('res :>> ', res);
+    // let sshKeyPath = 'C:\\Users\\hongji\\.ssh\\id_ed25519' //.replace(/\\/g, "\\\\")
+    // const res = await git.clone("git@gitlab.mycyclone.com:lang.huang/repo.git", "D:\\bug\\gitTest\\repo", [`-c core.sshCommand=ssh -i ${sshKeyPath.replace(/\\/g, "\\\\")}`])
+    // // let res = await git.pull(["--allow-unrelated-histories", "--rebase=false"])
+    // console.log('res :>> ', res);
     // let res = await git.log()
     // try {
     //     const res = await git.pull(["--allow-unrelated-histories", "--rebase=false"])
@@ -96,7 +99,7 @@ const f1 = async () => {
         let res = await f1()
         console.log('res :>> \n', res);
     } catch (error) {
-        console.log('error :>> ', error.message.split('\n'));
+        console.log('error :>> ', error);
     }
 })()
 

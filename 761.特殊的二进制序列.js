@@ -1,7 +1,24 @@
 /*
  * @lc app=leetcode.cn id=761 lang=javascript
- *
- * [761] 特殊的二进制序列
+ *[761] 特殊的二进制序列
+特殊的二进制序列是具有以下两个性质的二进制序列：
+    0 的数量与 1 的数量相等。
+    二进制序列的每一个前缀码中 1 的数量要大于等于 0 的数量。
+给定一个特殊的二进制序列 S，以字符串形式表示。
+定义一个操作为: 首先选择 S 的两个连续且非空的特殊的子串，然后将它们交换。
+（两个子串为连续的当且仅当第一个子串的最后一个字符恰好为第二个子串的第一个字符的前一个字符。)
+在任意次数的操作之后，交换后的字符串按照字典序排列的最大的结果是什么？
+
+示例 1:
+输入: S = "11011000"
+输出: "11100100"
+解释:
+将子串 "10" （在S[1]出现） 和 "1100" （在S[3]出现）进行交换。
+这是在进行若干次操作后按字典序排列最大的结果。
+
+说明:
+S 的长度不超过 50。
+S 保证为一个满足上述定义的特殊 的二进制序列。
  */
 
 // @lc code=start
@@ -9,22 +26,27 @@
  * @param {string} s
  * @return {string}
  */
-function makeLargestSpecial(s) {
-    const candidates = new Array()
-    for (let i = 0, cur = 0, last = 0; i < s.length; i++) {
-        cur += s.charCodeAt(i) === '1'.charCodeAt(0) ? 1 : -1
-        if (cur == 0) {
-            candidates.push("1" + makeLargestSpecial(s.substring(last + 1, i)) + "0")
-            last = i + 1
+var makeLargestSpecial = function (s) {
+    console.log('s', s)
+    if (s.length < 5) return ""
+    let cnt = 0, pre = 0
+    for (let i = 0; i < s.length; i++) {
+        cnt += s[i] === '1' ? 1 : -1
+        if (cnt === 0) {
+            const special = makeLargestSpecial(s.substring(pre + 1, i))
+            pre = i + 1
         }
     }
-    candidates.sort((a, b) => b.localeCompare(a))
-    return candidates.join("")
 };
-
 // @lc code=end
 
-var s = '110011100110110000'
+var s = "110011100110110000"
+//               ↓ 
+//       111001101100001100
+//               ↓
+//       111011000110001100
+//               ↓
+//       111100100110001100
+var t = "111100100110001100"
 
-let res = makeLargestSpecial(s)
-console.log('res', res)
+makeLargestSpecial(s)

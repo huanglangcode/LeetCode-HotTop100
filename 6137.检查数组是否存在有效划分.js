@@ -1,93 +1,45 @@
 /**
  * @param {number[]} nums
  * @return {boolean}
-首先初始化2，3的值，并返回长度为2和3的情况
-遍历剩下的数组中的元素，如果存在1到3再到5这样的连续两次跳跃，直接返回false
-动态转移方程有以下三种情况：
-动态转移方程1: 22->222,即：有i-1为true，且nums[i] == nums[i-2]，可以推出i为true；
-动态转移方程2: 1234-12344，即：有i-2为true，且nums[i]==nums[i-1]，可以推出i为true；
-动态转移方程3: 1123-> 11234，即：有i-3为true，且nums[i]-nums[i-1]==nums[i-1]-nums[i-2]，可以推出i为true；
-返回下标为len-1的结果即可
+给你一个下标从 0 开始的整数数组 nums ，你必须将数组划分为一个或多个 连续 子数组。
+如果获得的这些子数组中每个都能满足下述条件 之一 ，则可以称其为数组的一种 有效 划分：
+子数组 恰 由 2 个相等元素组成，例如，子数组 [2,2] 。
+子数组 恰 由 3 个相等元素组成，例如，子数组 [4,4,4] 。
+子数组 恰 由 3 个连续递增元素组成，并且相邻元素之间的差值为 1 。例如，子数组 [3,4,5] ，但是子数组 [1,3,5] 不符合要求。
+如果数组 至少 存在一种有效划分，返回 true ，否则，返回 false 。
+
+示例 1：
+输入：nums = [4,4,4,5,6]
+输出：true
+解释：数组可以划分成子数组 [4,4] 和 [4,5,6] 。
+这是一种有效划分，所以返回 true 。
+示例 2：
+输入：nums = [1,1,1,2]
+输出：false
+解释：该数组不存在有效划分。
+
+提示：
+2 <= nums.length <= 105
+1 <= nums[i] <= 106
  */
-function validPartition(nums) {
-    let n = nums.length, dp = new Array(n).fill(false)
-    dp[0] = true
-    dp[1] = nums[0] === nums[1]
-    for (let i = 2; i < n; i++) {
+var validPartition = function (nums) {
+    let dp = new Array(nums.length).fill(false)
+    dp[0] = false, dp[1] = nums[0] === nums[1]
+    for (let i = 2; i < nums.length; i++) {
+        if (i === 2) {
+            dp[i] = (nums[i] - nums[i - 1] === nums[i - 1] - nums[i - 2] && nums[i] - nums[i - 1] === 1)
+                || nums[i] === nums[i - 1]
+        } else {
+            dp[i] = (nums[i] === nums[i - 1] && dp[i - 2])
+                || (nums[i] - nums[i - 1] === nums[i - 1] - nums[i - 2] && nums[i] - nums[i - 1] === 1 && dp[i - 3])
+                || (nums[i] === nums[i - 1] && nums[i] === nums[i - 2] && dp[i - 3])
+        }
     }
-    return dp[n - 1]
-}
-var nums = [4, 4, 4, 5, 6, 7, 8]
-
-var result = validPartition(nums)
-
-console.log('res2', result)
+    return dp[nums.length - 1]
+};
 
 
-// enum State {
-//     Single,
-//     Double,
-//     Triple,
-//     Increase,
-//     MidIncrease,
-//     None
-// }
+var nums = [35, 36, 37, 38, 39, 40, 41]
 
-// var validPartition = function (nums: number[]): boolean {
-//     let pre = nums[0], idx = 1
-//     function getNext() {
-//         return nums[idx++]
-//     }
-//     let state = State.Single
-//     while (state !== State.None && idx < nums.length) {
-//         let char = getNext()
-//         console.log('char', char)
-//         switch (state) {
-//             case State.Single:
-//                 switch (char) {
-//                     case pre:
-//                         state = State.Double
-//                         break;
-//                     case pre + 1:
-//                         pre = char
-//                         state = State.MidIncrease
-//                         break
-//                     default:
-//                         state = State.None
-//                         break;
-//                 }
-//                 break;
-//             case State.Double:
-//                 switch (char) {
-//                     case pre:
-//                         state = State.Triple
-//                         break;
-//                     default:
-//                         state = State.Single
-//                         break;
-//                 }
-//                 break;
-//             case State.Triple:
-//                 pre = char
-//                 state = State.Single
-//                 break;
-//             case State.MidIncrease:
-//                 switch (char) {
-//                     case pre + 1:
-//                         state = State.Increase
-//                         break;
-//                     default:
-//                         state = State.None
-//                         break;
-//                 }
-//                 break;
-//             case State.Increase:
-//                 state = State.Single
-//                 break;
-//             default:
-//                 state = State.None
-//                 break;
-//         }
-//     }
-//     return state === State.Double || state === State.Increase || state === State.Triple
-// };
+let res = validPartition(nums)
+console.log('res', res)

@@ -1,4 +1,4 @@
-export class PriorityQueue {
+class PriorityQueue {
     constructor(
         compare = (a, b) => a[0] - b[0] < 0
     ) {
@@ -57,3 +57,50 @@ export class PriorityQueue {
         [this.data[a], this.data[b]] = [this.data[b], this.data[a]]
     }
 }
+
+
+class PriorQueue {
+    constructor(compare = (a, b) => a - b < 0) {
+        this.queue = [];
+        this.compare = compare
+    }
+
+    /**
+     * 
+     * @param {string} element 
+     * @returns 
+     */
+    push(element) {
+        let l = 0, r = this.queue.length - 1
+        while (l <= r) {
+            const mid = l + ((r - l) >> 1)
+            if (this.compare(this.queue[mid], element)) {
+                r = mid - 1
+            } else {
+                l = mid + 1
+            }
+        }
+        this.queue.splice(l, 0, element)
+    }
+
+    top() {
+        return this.queue[0]
+    }
+
+    shift() {
+        return this.queue.shift()
+    }
+
+    get size() {
+        return this.queue.length
+    }
+}
+
+const p = new PriorQueue()
+
+p.push(1)
+p.push(10)
+p.push(100)
+p.push(30)
+p.push(50)
+console.log('p :>> ', p);

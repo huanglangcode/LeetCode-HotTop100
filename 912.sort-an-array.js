@@ -68,34 +68,18 @@ var partition = (nums, left, right) => {
 // @lc code=end
 
 const sortArrayV2 = (arr) => {
-    if (arr.length < 2) {
-        return arr;
-    }
-    let mid = arr.length >> 1
-    let left = arr.slice(0, mid)
-    let right = arr.slice(mid)
-    return mergeV2(sortArrayV2(left), sortArrayV2(right))
+   
 }
 
-const mergeV2 = (arr1, arr2) => {
-    let temp = []
-    while (arr1.length && arr2.length) {
-        if (arr1[0] < arr2[0]) {
-            temp.push(arr1.shift())
-        } else {
-            temp.push(arr2.shift())
-        }
+const quickSortV2 = (arr, left, right) => {
+    left = left > arr.length - 1 ? arr.length - 1 : left
+    right = right < 0 ? 0 : right
+    if (left < right) {
+        let p = partition(arr, left, right);
+        quickSortV2(arr, left, p - 1);
+        quickSortV2(arr, p + 1, right);
     }
-    if (arr1.length) {
-        temp.push(...arr1)
-    }
-    if (arr2.length) {
-        temp.push(...arr2)
-    }
-    return temp
 }
-
-
 
 var arr = [5, 1, 3, 7, 2, 4, 6, 8, 2, 5, 7, 6, 4, 1, 2, 4, 6, 7, 5, 8, 7, 9, 10]
 // sortArray(arr);
